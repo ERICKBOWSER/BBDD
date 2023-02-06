@@ -25,7 +25,7 @@ ADD COLUMN nombre TIPO
 > Para añadir una nueva columna.
 
 MODIFY COLUMN nombreColumna TIPO
-> Modifica la columna y nos permite modificar el tipo.
+> Nos permite modificar el tipo de la columna.
 
 ![image](https://user-images.githubusercontent.com/92431188/216872445-f10a24eb-a2fe-4234-86f2-1e8821fced20.png)
 
