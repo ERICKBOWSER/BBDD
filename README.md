@@ -31,7 +31,7 @@ AFTER nomTabla
 > Para que al modificar alguna de las tablas, se agregue en la posición que especifiquemos.
 
 
-TYNYINT
+TINYINT
 > Es igual a INT(1) > 1 byte[-128, 127] UNSIGNED
 
 UNSIGNED
