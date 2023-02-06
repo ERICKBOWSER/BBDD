@@ -53,7 +53,7 @@ VARCHAR
 > Se suele usar para emails.
 
 SET
-> Permite almacenar diferentes valores y posteriormente poder usar esos datos
+> Permite almacenar diferentes valores y posteriormente poder usar esos datos.
 > Devuelve los valores en el mismo orden en el que se han especificado.
 
 ENUM
