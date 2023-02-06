@@ -70,10 +70,17 @@ ON DELETE NO ACTION ON UPDATE CASCADE
 > Esta de forma predeterminada.
 
 Tipos:
-- NO ACTION / RESTRICT
---  Especifica que si se intenta borrar el dato no realice ninguna acción en este
+* NO ACTION / RESTRICT
+* * Especifica que si se intenta borrar el dato no realice ninguna acción en este
 
+* CASCADE
+* * Si se realiza alguna acción se modifican todos los datos en cascada.
 
+* SET NULL
+* * Si se realiza alguna acción establece los valores en NULL.
+
+* SET DEFAULT
+* * Cambia todos los valores en los datos por defecto. Hay que definir un valor por defecto para esto.
 
 
 
