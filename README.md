@@ -61,6 +61,8 @@ ENUM
 > Puede almacenar varios valores como opciones fijas, de las cuales se pueden seleccionar varios.
 > Solo puede devolver un dato.
 
+![image](https://user-images.githubusercontent.com/92431188/216862970-a73c360a-52ba-4af5-a930-3f2e1467b636.png)
+
 
 
 
