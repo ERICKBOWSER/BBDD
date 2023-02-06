@@ -80,7 +80,7 @@ ON DELETE NO ACTION ON UPDATE CASCADE
 
 Tipos:
 * NO ACTION / RESTRICT
-* * Especifica que si se intenta borrar el dato no realice ninguna acción en este
+* * Especifica que si se intenta borrar o modificar el dato no realice ninguna acción en este
 
 * CASCADE
 * * Si se realiza alguna acción se modifican todos los datos en cascada.
