@@ -2,6 +2,20 @@
 
 # DDL - Data Definition Language
 
+CREATE DATABASE nombreBBDD;
+> Se usa para crear la BBDD.
+> Es obligatorio ponerlo.
+
+USE nombreBBDD;
+> Especifica la BBDD que vamos a usar.
+> Si no se coloca no se modifica ninguna BBDD.
+
+CONSTRAINT pk_nombreTabla PRIMARY KEY(nombrePK)
+> Se usa para especificar cual va a ser la clave primaria(PK).
+
+![image](https://user-images.githubusercontent.com/92431188/216859733-f729e2f4-6bb9-450d-8c6e-e64ab8074788.png)
+
+
 ALTER TABLE nombreTabla
 > Se usa para modificar una tabla.
 > Las modificaciones que se quieran hacer con ADD y DROP van dentro.
