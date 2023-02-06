@@ -5,6 +5,7 @@
 ALTER TABLE nombreTabla
 > Se usa para modificar una tabla.
 > Las modificaciones que se quieran hacer con ADD y DROP van dentro.
+> No se puede modificar restricciones.
 
 ADD COLUMN nombre TIPO
 > Para añadir una nueva columna.
@@ -19,6 +20,10 @@ AFTER nomTabla
 TYNYINT
 > Es igual a INT(1) > 1 byte[-128, 127] UNSIGNED
 
+UNSIGNED
+> Hace que no se admitan números negativos.
+> No afecta al número de bits que se usa.
+
 AUTO_INCREMENT
 > Añade automáticamente valores numéricos.
 
@@ -29,7 +34,9 @@ CHAR
 > Ocupa el espacio que se especifique, es fijo.
 
 VARCHAR
+> No desperdicia el espacio ya que es variable.
 > Puede llegar a ocupar el espacio que se le especifique.
+> Se suele usar para emails.
 
 SET
 > Permite almacenar diferentes valores y posteriormente poder usar esos datos
