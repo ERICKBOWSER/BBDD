@@ -55,6 +55,7 @@ VARCHAR
 SET
 > Permite almacenar diferentes valores y posteriormente poder usar esos datos.
 > Devuelve los valores en el mismo orden en el que se han especificado.
+> Puede devolver múltiples valores.
 
 ENUM
 > Puede almacenar varios valores como opciones fijas, de las cuales se pueden seleccionar varios.
