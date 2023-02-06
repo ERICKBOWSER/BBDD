@@ -30,8 +30,11 @@ MODIFY COLUMN nombreColumna TIPO
 ![image](https://user-images.githubusercontent.com/92431188/216872445-f10a24eb-a2fe-4234-86f2-1e8821fced20.png)
 
 
-DROP PRIMARY KEY
+DROP [PRIMARY KEY || FOREIGN KEY] nombreKey
 > Para borrar la PK
+
+![image](https://user-images.githubusercontent.com/92431188/216873508-b402b2ed-e280-4bb8-aea0-f14a32bf15b5.png)
+
 
 AFTER nomTabla
 > Para que al modificar alguna de las tablas, se agregue en la posición que especifiquemos.
@@ -70,7 +73,7 @@ ENUM
 ![image](https://user-images.githubusercontent.com/92431188/216862970-a73c360a-52ba-4af5-a930-3f2e1467b636.png)
 
 ***
-## Tipos de restricciones de las FK5
+## Tipos de restricciones de las FK
 
 ON DELETE NO ACTION ON UPDATE CASCADE
 > Esta de forma predeterminada.
