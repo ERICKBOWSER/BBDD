@@ -63,10 +63,15 @@ ENUM
 
 ![image](https://user-images.githubusercontent.com/92431188/216862970-a73c360a-52ba-4af5-a930-3f2e1467b636.png)
 
+***
+## Tipos de restricciones de las FK5
 
+ON DELETE NO ACTION ON UPDATE CASCADE
+> Esta de forma predeterminada.
 
-
-
+Tipos:
+- NO ACTION / RESTRICT
+--  Especifica que si se intenta borrar el dato no realice ninguna acción en este
 
 
 
