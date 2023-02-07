@@ -29,13 +29,36 @@ MODIFY COLUMN nombreColumna TIPO
 
 ![image](https://user-images.githubusercontent.com/92431188/216872445-f10a24eb-a2fe-4234-86f2-1e8821fced20.png)
 
+DROP COLUMN nombreColumna
+> Para eliminar una columna, si es PK o FK, primero hay que eliminar sus relaciones.
+
+![image](https://user-images.githubusercontent.com/92431188/217112298-1f9bb731-3e33-4734-81e4-21985dd113f0.png)
 
 DROP PRIMARY KEY
 > Para borrar la PK
 
+![image](https://user-images.githubusercontent.com/92431188/217111611-b6960403-759c-4d61-ada8-2604e917c5a3.png)
+
+DROP FOREIGN KEY fk_nombre
+> Para borra la FK
+
+![image](https://user-images.githubusercontent.com/92431188/217111794-eb768254-b73d-45a7-abac-74b0cc367228.png)
+
+
 AFTER nomTabla
 > Para que al modificar alguna de las tablas, se agregue en la posición que especifiquemos.
 
+![image](https://user-images.githubusercontent.com/92431188/217112817-632c5e83-19ef-4e65-b606-5b7f0530e134.png)
+
+DROP TABLE nombreTabla
+> Para eliminar una tabla.
+
+![image](https://user-images.githubusercontent.com/92431188/217112419-1ac583cd-82fb-462f-8b20-3093c51f6dcc.png)
+
+DROP DATABASE nombreBBDD
+> Para eliminar una BBDD.
+
+![image](https://user-images.githubusercontent.com/92431188/217112565-26e16b99-938e-42d7-8ee1-17f4277210f5.png)
 
 TINYINT
 > Es igual a INT(1) > 1 byte[-128, 127] UNSIGNED
@@ -49,6 +72,9 @@ AUTO_INCREMENT
 
 UNIQUE
 > NO permite que un dato se vuelva a repetir
+
+![image](https://user-images.githubusercontent.com/92431188/217111988-354051fc-9006-4699-904e-f58866dffede.png)
+
 
 CHAR
 > Ocupa el espacio que se especifique, es fijo.
@@ -70,14 +96,14 @@ ENUM
 ![image](https://user-images.githubusercontent.com/92431188/216862970-a73c360a-52ba-4af5-a930-3f2e1467b636.png)
 
 ***
-## Tipos de restricciones de las FK5
+## Tipos de restricciones de las FK
 
 ON DELETE NO ACTION ON UPDATE CASCADE
 > Esta de forma predeterminada.
 
 Tipos:
 * NO ACTION / RESTRICT
-* * Especifica que si se intenta borrar el dato no realice ninguna acción en este
+* * Especifica que si se intenta borrar o modificar el dato no realice ninguna acción en este
 
 * CASCADE
 * * Si se realiza alguna acción se modifican todos los datos en cascada.
