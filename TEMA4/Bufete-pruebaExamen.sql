@@ -31,7 +31,9 @@ CREATE TABLE IF NOT EXISTS sujetos
     telefono CHAR(9) NOT NULL UNIQUE,
     desSujeto VARCHAR(50) NULL,
     
-    CONSTRAINT pk_sujeto PRIMARY KEY(idSujeto)    
+    CONSTRAINT pk_sujeto PRIMARY KEY(idSujeto),
+    
+    CONSTRAINT email_unico UNIQUE(email)
 );
 
 CREATE TABLE IF NOT EXISTS clientela
@@ -50,7 +52,7 @@ CREATE TABLE IF NOT EXISTS clientela
 CREATE TABLE IF NOT EXISTS abogados
 (
 	idAbogado INT(10) NOT NULL UNIQUE,
-    numColegiado TINYINT(20) NOT NULL UNIQUE,
+    numColegiado CHAR(20) NOT NULL UNIQUE,
     desAbogado VARCHAR(100) NULL,
     idSujeto INT(10) NULL,
     
@@ -83,7 +85,7 @@ CREATE TABLE IF NOT EXISTS llevan
     idCasos INT(10) NOT NULL,
     idTipoCaso INT(10) NOT NULL,
     fecinicio DATE NOT NULL,
-    numdias	CHAR(200),
+    numdias	TINYINT,
     fecFin DATE NULL,
     
     CONSTRAINT pk_llevan PRIMARY KEY(idAbogado, idCasos, idTipoCaso),
@@ -93,7 +95,7 @@ CREATE TABLE IF NOT EXISTS llevan
 );
 
 ALTER TABLE llevan
-	DROP CONSTRAINT fk_idAbogado,
+	DROP FOREIGN KEY fk_idAbogado,
     ADD CONSTRAINT fk_llevan_abogados FOREIGN KEY(idAbogado)
 		REFERENCES abogados(idAbogado)
         ON DELETE NO ACTION ON UPDATE CASCADE,
@@ -106,11 +108,35 @@ ALTER TABLE casos
 	MODIFY COLUMN presupuesto DECIMAL(7, 2) UNSIGNED;
 
 
+ALTER TABLE llevan
+	DROP PRIMARY KEY,
+    DROP FOREIGN KEY fk_llevan_casos,
+    DROP FOREIGN KEY fk_llevan_abogados,
+    
+    DROP COLUMN idTipoCaso;
 
+ALTER TABLE casos
+	DROP PRIMARY KEY,
+    DROP FOREIGN KEY fk_idTipoCaso,
+    
+    DROP COLUMN idTipoCaso,
+    
+    ADD CONSTRAINT pk_casos PRIMARY KEY(idCasos);
+    
+    
+ALTER TABLE llevan
+	ADD CONSTRAINT pk_llevan_nuevo PRIMARY KEY(idAbogado, idCasos),
+    ADD CONSTRAINT fk_llevan_casos FOREIGN KEY(idCasos)
+		REFERENCES casos(idCasos)
+        ON DELETE NO ACTION ON UPDATE CASCADE,
+	ADD CONSTRAINT fk_llevan_abogados FOREIGN KEY(idAbogado)
+		REFERENCES abogados(idAbogado)
+        ON DELETE NO ACTION ON UPDATE CASCADE;
 
+DROP TABLE tipoCasos;
 
-
-
+/*ALTER TABLE llevan
+	ADD COLUMN nomAbogado CHAR(20) AFTER idAbogado;*/
 
 
 
