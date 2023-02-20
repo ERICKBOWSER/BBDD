@@ -140,8 +140,23 @@ INSERT INTO seguridad (codsegur, codemple)
 	VALUES (50, 1);
     
 -- Ejer 12
+ALTER TABLE empleados
+	ADD COLUMN jubilacion DATE NULL;
+    
+    -- < > -->  distinto en sql estandar
+    
+-- Ejer 13
+START TRANSACTION;
+	UPDATE restaurador
 
 
+	UPDATE empleados
+		SET jubilacion = CURDATE() -7
+        WHERE codemple = 5
+
+
+
+COMMIT;
 
 
 

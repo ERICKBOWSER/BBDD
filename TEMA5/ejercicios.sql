@@ -26,16 +26,13 @@ DELETE FROM empleados
 
 -- Ejer 7
 UPDATE empleados
-	SET numde = 120
-    WHERE nomem = "Dorinda" AND ape1em = "Lara";
-    
-UPDATE empleados
-	SET salarem = salarem * 1.1
-	WHERE nomem = "Dorinda" AND ape1em = "Lara";
-    
-UPDATE empleados
-	SET extelem = 910
-    WHERE nomem = "Dorinda" AND ape1em = "Lara";
+	SET numde = 120,
+		salarem = salarem * 1.1,
+        extelem = 910
+    WHERE (nomem = "Dorinda" AND ape1em = "Lara") -- Al comparar se coloca parentesis
+		OR (nomem = "Pepito" AND ape1em = "Pérez");
+
+-- Primero se hacen las operaciones AND Y luego las OR 
 
 
 SELECT * FROM departamentos;
