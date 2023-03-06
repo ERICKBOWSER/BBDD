@@ -115,10 +115,31 @@ Tipos:
 * * Cambia todos los valores en los datos por defecto. Hay que definir un valor por defecto para esto.
 
 
+# SENTENCE QUERY LANGUAGE (SQL)
+
+## IMPORTANTE
+
+Si queremos mostrar datos uno detrás de otro se usa ORDER BY.
+***
+No se puede colocar una comparación de agrupación dentro de un WHERE ya que los grupos todavía no están hechos.
 
 
 
+Sentencias SELECT
 
+Clausulas:
+* SELECT
+* FROM
+* WHERE
+* GROUP BY
+* HAVING
+* ORDER BY
+
+Orden de ejecución:
+1.  FROM
+2.  WHERE
+3.  GROUP BY
+4.  HAVING
 
 
 
