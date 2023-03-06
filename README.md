@@ -122,7 +122,9 @@ Tipos:
 Si queremos mostrar datos uno detrás de otro se usa ORDER BY.
 ***
 No se puede colocar una comparación de agrupación dentro de un WHERE ya que los grupos todavía no están hechos.
-
+***
+El orden por defecto es ASC.
+***
 
 
 Sentencias SELECT
@@ -141,9 +143,23 @@ Orden de ejecución:
 3.  GROUP BY
 4.  HAVING
 
+## Operadores lógicos
+
+=   Igual que
+>   Mayor que
+>=  Mayor o igual
+<   Menor que
+<=  Menor o igual
+<>  Diferente de | Si se coloca != se lo traga, pero no es correcto usarlo.
 
 
+Se ejecuta de izquierda a derecha teniendo como prioridad el **AND**
 
+AND   Y
+OR    O
+NOT   NO
+
+IMPORTANTE: **AND** tiene prioridad sobre **OR**
 
 
 
