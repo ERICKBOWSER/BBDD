@@ -162,6 +162,28 @@ NOT   NO
 IMPORTANTE: **AND** tiene prioridad sobre **OR**
 
 
+# Tema 6
+
+Prepara una rutina(procedimiento | funcion)
+
+que muestre -> procedimiento
+
+que devuelva (función | procedimiento)
+
+1 valor -> función
+  + de un valor -> procedimiento
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
