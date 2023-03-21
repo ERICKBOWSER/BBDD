@@ -142,6 +142,7 @@ Orden de ejecución:
 2.  WHERE
 3.  GROUP BY
 4.  HAVING
+5.  ORDER BY
 
 ## Operadores lógicos
 
@@ -174,8 +175,13 @@ que devuelva (función | procedimiento)
   + de un valor -> procedimiento
 
 
+## IMPORTANTE
 
+Si se crea un clon es obligatorio colocar el nombre de la tabla en la consulta
 
+***
+
+Se puede colocar un AND dentro de un JOIN
 
 
 
