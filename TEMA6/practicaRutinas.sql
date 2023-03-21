@@ -25,6 +25,10 @@ BEGIN
 		WHERE numde = departamento;
 	RETURN presupuesto;
     
+    -- Otra forma de hacerlo
+    /*RETURN(SELECT presude FROM departamentos
+			WHERE numde = departamento);*/
+    
 END ;
 DELIMITER ;
 
@@ -34,18 +38,28 @@ SELECT * FROM departamentos;
 DROP PROCEDURE IF EXISTS practicaRutina2;
 DELIMITER //
 CREATE PROCEDURE practicaRutina2
-	(IN empleado INT)
+	(IN empleado INT, OUT fecha DATE, OUT director INT)
 
 BEGIN
-	SELECT fecinem AS "Fecha ingreso", nomem AS "Nombre" 
+	SELECT fecinem, dirigir.numempdirec INTO fechaIngreso, director
+    FROM empleados
+    JOIN departamentos ON empleados.numde = dirigir.numdepto
+    
+    
+	
+
+
+
+	/*SELECT fecinem AS "Fecha ingreso", nomem AS "Nombre" 
 	FROM empleados
     JOIN dirigir ON dirigir.numempdirec = empleados.numem
-		WHERE numem = 110;
+		WHERE numem = 110;*/
 
 END ;
 DELIMITER ;
 
-CALL practicaRutina2(1);
+CALL practicaRutina2(110, @ingreso, @dir);
+SELECT CONCAT('Fecha ingreso: ', @ingreso, ' director: ', IFNULL( @dir, 'sin director'));
 
 DROP PROCEDURE IF EXISTS practicaRutina3;
 DELIMITER //
