@@ -162,17 +162,92 @@ NOT   NO
 
 IMPORTANTE: **AND** tiene prioridad sobre **OR**
 
+## INNER JOIN 
 
-# Tema 6
+Une dos tablas por un dato que tengan en común.
 
+Código:
+
+```
+SELECT consulta
+  FROM tabla1
+  INNER JOIN tabla2 ON tabla1.comparar = tabla2.comparar
+```
+
+Ejemplo: en este ejemplo el dato en común que comparten es el numde que esta incluido en las dos tablas.
+
+<p align="center"> <img src="https://user-images.githubusercontent.com/92431188/230786530-cba42947-21b5-48bf-b2e0-1f217559c53a.png"> </p>
+
+
+## ORDER BY
+
+Se utiliza para especificar porque criterio se pretende ordenar los registros de una tabla.
+
+Código:
+
+```
+SELECT consulta
+  FROM tabla
+  ORDER BY datoOrdenar ASC/DESC
+
+```
+
+
+## GROUP BY
+
+Se utiliza para especificar porque criterio se puede agrupar a los registros de una tabla.
+
+Código:
+
+```
+SELECT consulta
+  FROM tabla
+  GROUP BY datoAgrupar
+
+```
+
+Ejemplo: en este ejemplo agrupamos por la extelem todos los datos, con lo que conseguimos que los datos que se repitan solo salgan 1 vez.
+
+<p align="center"> <img src="https://user-images.githubusercontent.com/92431188/230790172-5b99d6b9-9a05-43e3-857d-69a8d81aa366.png"> </p>
+
+## Procedimientos almacenados
+
+Es una porción de código que se puede guardar y reutlizar. Se usa para encapsular y reutilizar código. 
+
+Acepta parámetros para interactuar con ellos.
+
+Código: 
+
+```
+DELIMITER //
+  CREATE PROCEDURE nombreProcedimiento (IN varEntrada TIPO, OUT, varSalida TIPO)
+  BEGIN
+    SELECT consulta INTO varSalida -- el resultado se almacena en la variable de salida
+    FROM tabla;
+  END //
+DELIMITER ;
+
+-- Llamar al procedimiento
+CALL nombreProcedimiento(valorEntradaSiExiste, @varSalidaSiExiste);
+
+IMPORTANTE: **IN** se usa para los parámetros de entrada y **OUT** para los parámetros de salida.
+IMPORTANTE: DELIMITER limita el bloque de código.
+```
+
+
+
+## Rutinas
+
+```
 Prepara una rutina(procedimiento | funcion)
 
-que muestre -> procedimiento
+  que muestre -> procedimiento
 
-que devuelva (función | procedimiento)
+  que devuelva (función | procedimiento)
 
-1 valor -> función
-  + de un valor -> procedimiento
+  1 valor -> función
+    + de un valor -> procedimiento
+```
 
 
 ## IMPORTANTE
@@ -183,12 +258,26 @@ Si se crea un clon es obligatorio colocar el nombre de la tabla en la consulta
 
 Se puede colocar un AND dentro de un JOIN
 
+## Funciones existentes
 
+``CONCAT(tabla1, "que colocar entre uno y otro", tabla2, "", etc)``
 
+* Sirve para concatenar datos
+* Si se quiere separar o meter algo entre un dato y otro hay que especificarlo
+* IFNULL (tabla, "contenido en caso de que sea NULL")
 
+``CONCAT_WS("Se define antes que los datos a concatenar", tabla1, tabla2, etc)``
 
+* Si se quiere que haya un espacio o algo entre cada dato se especifica al principio y solo 1 vez.
+* No hace falta colocar IFNULL
 
+``IFNULL("Condición a analizar", "En caso de NULL se ejecuta esto")``
 
+``DISTINCT()``
+**  No devuelve valores repetidos.
+**  Hace que los valores sean únicos.
+
+![image](https://user-images.githubusercontent.com/92431188/230805948-d2e73aa2-5e4a-42d1-8370-93822ac61970.png)
 
 
 
