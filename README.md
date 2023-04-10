@@ -219,21 +219,24 @@ Acepta parámetros para interactuar con ellos.
 Código: 
 
 ```
-DELIMITER //
+DELIMITER $$
   CREATE PROCEDURE nombreProcedimiento (IN varEntrada TIPO, OUT, varSalida TIPO)
   BEGIN
     SELECT consulta INTO varSalida -- el resultado se almacena en la variable de salida
     FROM tabla;
-  END //
+  END $$ -- Si se coloca // no se crea el procedimiento
 DELIMITER ;
 
 -- Llamar al procedimiento
 CALL nombreProcedimiento(valorEntradaSiExiste, @varSalidaSiExiste);
 
-IMPORTANTE: **IN** se usa para los parámetros de entrada y **OUT** para los parámetros de salida.
+IMPORTANTE: IN se usa para los parámetros de entrada y OUT para los parámetros de salida.
 IMPORTANTE: DELIMITER limita el bloque de código.
 ```
 
+Ejemplo: en el que se le pasa un código de zona y nos devuelve los datos que coincidan con el.
+
+<p align="center"> <img src="https://user-images.githubusercontent.com/92431188/230955408-f29a5842-f9f1-40cf-bd6e-86ee11d803d1.png"> </p>
 
 
 ## Rutinas
