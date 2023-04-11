@@ -91,10 +91,23 @@ DELIMITER ;
 
 CALL act2_ejer14("Finanzas");
 
--- 15
+-- 15 -- NO FUNCIONA
+DROP PROCEDURE IF EXISTS act2_ejer15;
+DELIMITER $$
+CREATE PROCEDURE act2_ejer15
+	(IN fecinicio DATE, IN fecfin DATE)
+BEGIN
+	SELECT nomem, dirigir.fecfindir, nomde  FROM empleados 
+	JOIN departamentos ON departamentos.numde = empleados.numde
+    JOIN dirigir ON dirigir.numempdirec = empleados.numem
+		WHERE nomde = "Personal" AND fecfindir BETWEEN fecinicio AND fecfin;
+END $$
+DELIMITER ;
 
+CALL act2_ejer15('1999-06-10', '2012-03-10');
 
-
+SELECT * FROM departamentos;
+SELECT * FROM dirigir;
 
 
 
