@@ -125,6 +125,12 @@ No se puede colocar una comparación de agrupación dentro de un WHERE ya que lo
 ***
 El orden por defecto es ASC.
 ***
+Las funciones de agregado (SUM, AVG, COUNT, etc) no se pueden usar en el WHERE
+***
+Se puede usr GROUP BY sin HAVING
+***
+No se puede hacer un HAVING sin un GROUP BY
+***
 
 
 Sentencias SELECT
@@ -280,7 +286,63 @@ Se puede colocar un AND dentro de un JOIN
 **  No devuelve valores repetidos.
 **  Hace que los valores sean únicos.
 
-![image](https://user-images.githubusercontent.com/92431188/230805948-d2e73aa2-5e4a-42d1-8370-93822ac61970.png)
+<p align="center"> <img src="https://user-images.githubusercontent.com/92431188/230805948-d2e73aa2-5e4a-42d1-8370-93822ac61970.png"> </p>
+
+## GROUP BY Y HAVING
+
+### IMPORTANTE
+
+Se puede usr GROUP BY sin HAVING
+***
+No se puede hacer un HAVING sin un GROUP BY
+***
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
