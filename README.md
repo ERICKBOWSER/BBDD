@@ -131,7 +131,7 @@ Se puede usr GROUP BY sin HAVING
 ***
 No se puede hacer un HAVING sin un GROUP BY
 ***
-
+Mientras se está realizando una manipulación en una tabla, no se puede hacer consultas de esa misma tabla
 
 Sentencias SELECT
 
@@ -165,8 +165,22 @@ Se ejecuta de izquierda a derecha teniendo como prioridad el **AND**
 AND   Y
 OR    O
 NOT   NO
+SOME / ANY
+ALL
+NOT IN
 
 IMPORTANTE: **AND** tiene prioridad sobre **OR**
+
+Ejemplo NOT IN: devuelve las casas que no estan reservadas
+
+```
+SELECT codcasa
+FROM casas
+WHERE codcasa NOT IN
+  (SELECT codcasa
+   FROM reservas)
+
+```
 
 ## INNER JOIN 
 
@@ -283,16 +297,39 @@ Se puede colocar un AND dentro de un JOIN
 ``IFNULL("Condición a analizar", "En caso de NULL se ejecuta esto")``
 
 ``DISTINCT()``
-**  No devuelve valores repetidos.
-**  Hace que los valores sean únicos.
+*  No devuelve valores repetidos.
+*  Hace que los valores sean únicos.
 
 <p align="center"> <img src="https://user-images.githubusercontent.com/92431188/230805948-d2e73aa2-5e4a-42d1-8370-93822ac61970.png"> </p>
+
+``LEFT(nomColumna, número)``
+* Devuelve el número de carácteres de una cadena que se especifiqué. Empezando desde la izquierda.
+
+<p align="center"> <img src="https://user-images.githubusercontent.com/92431188/231684551-98ad2866-8562-441a-825c-1b5718faf95e.png"> </p>
+
+``SQRT(nombreColumna)``
+* Devuelve la raíz cuadrada de un número.
+
+<p align="center"> <img src="https://user-images.githubusercontent.com/92431188/231687351-35b7be43-bfab-4461-9e83-e835a71e87de.png"> </p>
+
+``MONTHNAME(fecha)´´
+* Devuelve el nombre del mes
+
+``DAYNAME(fecha)``
+* Devuelve el nombre del día de la semana
+
+<p align="center"> <img src="https://user-images.githubusercontent.com/92431188/231688629-355b360b-f912-41f0-b71e-f3ecb741f2db.png"> </p>
+
+
+
+
+
 
 ## GROUP BY Y HAVING
 
 ### IMPORTANTE
 
-Se puede usr GROUP BY sin HAVING
+Se puede usar GROUP BY sin HAVING
 ***
 No se puede hacer un HAVING sin un GROUP BY
 ***
