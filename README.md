@@ -131,7 +131,7 @@ Se puede usr GROUP BY sin HAVING
 ***
 No se puede hacer un HAVING sin un GROUP BY
 ***
-
+Mientras se está realizando una manipulación en una tabla, no se puede hacer consultas de esa misma tabla
 
 Sentencias SELECT
 
@@ -165,8 +165,22 @@ Se ejecuta de izquierda a derecha teniendo como prioridad el **AND**
 AND   Y
 OR    O
 NOT   NO
+SOME / ANY
+ALL
+NOT IN
 
 IMPORTANTE: **AND** tiene prioridad sobre **OR**
+
+Ejemplo NOT IN: devuelve las casas que no estan reservadas
+
+```
+SELECT codcasa
+FROM casas
+WHERE codcasa NOT IN
+  (SELECT codcasa
+   FROM reservas)
+
+```
 
 ## INNER JOIN 
 
