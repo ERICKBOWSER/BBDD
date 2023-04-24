@@ -125,7 +125,13 @@ No se puede colocar una comparación de agrupación dentro de un WHERE ya que lo
 ***
 El orden por defecto es ASC.
 ***
-
+Las funciones de agregado (SUM, AVG, COUNT, etc) no se pueden usar en el WHERE
+***
+Se puede usr GROUP BY sin HAVING
+***
+No se puede hacer un HAVING sin un GROUP BY
+***
+Mientras se está realizando una manipulación en una tabla, no se puede hacer consultas de esa misma tabla
 
 Sentencias SELECT
 
@@ -159,8 +165,22 @@ Se ejecuta de izquierda a derecha teniendo como prioridad el **AND**
 AND   Y
 OR    O
 NOT   NO
+SOME / ANY
+ALL
+NOT IN
 
 IMPORTANTE: **AND** tiene prioridad sobre **OR**
+
+Ejemplo NOT IN: devuelve las casas que no estan reservadas
+
+```
+SELECT codcasa
+FROM casas
+WHERE codcasa NOT IN
+  (SELECT codcasa
+   FROM reservas)
+
+```
 
 ## INNER JOIN 
 
@@ -219,21 +239,24 @@ Acepta parámetros para interactuar con ellos.
 Código: 
 
 ```
-DELIMITER //
+DELIMITER $$
   CREATE PROCEDURE nombreProcedimiento (IN varEntrada TIPO, OUT, varSalida TIPO)
   BEGIN
     SELECT consulta INTO varSalida -- el resultado se almacena en la variable de salida
     FROM tabla;
-  END //
+  END $$ -- Si se coloca // no se crea el procedimiento
 DELIMITER ;
 
 -- Llamar al procedimiento
 CALL nombreProcedimiento(valorEntradaSiExiste, @varSalidaSiExiste);
 
-IMPORTANTE: **IN** se usa para los parámetros de entrada y **OUT** para los parámetros de salida.
+IMPORTANTE: IN se usa para los parámetros de entrada y OUT para los parámetros de salida.
 IMPORTANTE: DELIMITER limita el bloque de código.
 ```
 
+Ejemplo: en el que se le pasa un código de zona y nos devuelve los datos que coincidan con el.
+
+<p align="center"> <img src="https://user-images.githubusercontent.com/92431188/230955408-f29a5842-f9f1-40cf-bd6e-86ee11d803d1.png"> </p>
 
 
 ## Rutinas
@@ -274,10 +297,146 @@ Se puede colocar un AND dentro de un JOIN
 ``IFNULL("Condición a analizar", "En caso de NULL se ejecuta esto")``
 
 ``DISTINCT()``
-**  No devuelve valores repetidos.
-**  Hace que los valores sean únicos.
+*  No devuelve valores repetidos.
+*  Hace que los valores sean únicos.
 
-![image](https://user-images.githubusercontent.com/92431188/230805948-d2e73aa2-5e4a-42d1-8370-93822ac61970.png)
+<p align="center"> <img src="https://user-images.githubusercontent.com/92431188/230805948-d2e73aa2-5e4a-42d1-8370-93822ac61970.png"> </p>
+
+``LEFT(nomColumna, número)``
+* Devuelve el número de carácteres de una cadena que se especifiqué. Empezando desde la izquierda.
+
+<p align="center"> <img src="https://user-images.githubusercontent.com/92431188/231684551-98ad2866-8562-441a-825c-1b5718faf95e.png"> </p>
+
+``SQRT(nombreColumna)``
+* Devuelve la raíz cuadrada de un número.
+
+<p align="center"> <img src="https://user-images.githubusercontent.com/92431188/231687351-35b7be43-bfab-4461-9e83-e835a71e87de.png"> </p>
+
+``MONTHNAME(fecha)``
+* Devuelve el nombre del mes
+
+``DAYNAME(fecha)``
+* Devuelve el nombre del día de la semana
+
+<p align="center"> <img src="https://user-images.githubusercontent.com/92431188/231688629-355b360b-f912-41f0-b71e-f3ecb741f2db.png"> </p>
+
+``SUBSTRING(atributoBuscar, posición)``
+* Devuelve el resto del contenido después de la posición que se especifique.
+
+<p align="center"> <img src="https://user-images.githubusercontent.com/92431188/233870192-0cd46c23-387f-4d53-82fb-a718e77019f6.png"> </p>
+
+``ROUND(atributo, número)``
+* Redondea un número a un número especifico de decimales.
+
+<p align="center"> <img src="https://user-images.githubusercontent.com/92431188/233872396-e85c3849-9d08-42b4-bcc2-16485dd0d4a8.png"> </p>
+
+
+``TIMESTAMPDIFF(unidad, fecha1, fecha2)``
+* unidad: devuelve un entero del tipo que se coloque que pueden ser MONTH, YEAR, MINUTE
+* fecha1: es la fecha que resta
+* fecha2: es la fecha a la que se le resta
+
+<p align="center"> <img src="https://user-images.githubusercontent.com/92431188/233876239-a74e2605-6177-4f3d-8156-a3f2c23b718d.png"> </p>
+
+``DATEDIFF(fecha1, fecha2)``
+* Devuelve el número de días de diferencia entre dos fechas.
+* IMPORTANTE: no se puede usar para calcular la edad
+
+
+
+## GROUP BY Y HAVING
+
+### IMPORTANTE
+
+Se puede usar GROUP BY sin HAVING
+***
+No se puede hacer un HAVING sin un GROUP BY
+***
+
+
+## VISTAS
+
+Es una consulta que se presenta como un tabla virtual a partir de un conjunto de tablas.
+
+Tiene la misma estructura que una tabla, almacena la definición y no los datos.
+
+
+IMPORTANTE: mysql no diferencia entre tabla y vistas, lo habítual es ponerle el prefijo "vista" al nombre.
+
+```
+CREATE VIEW vistaNombre AS
+  consulta;
+ 
+ -- Consultar
+ SELECT * FROM vistaNombre;
+
+-- Eliminar
+DROP VIEW vistaNombre
+
+-- Modificar
+ALTER VIEW vistaNombre
+
+```
+
+### SUBCONSULTAS
+
+Es una consulta que se encuentra dentro de otra consulta. Que se ejecutan de la última a la primera.
+
+IMPORTANTE
+
+Dentro de una sentencia se puede especificar hasta 16 subconsultas y dentro de una subconsulta se pueden especificar otras subconsultas.
+
+***
+
+<p align="center"> <img src="https://user-images.githubusercontent.com/92431188/233891022-a2232330-1943-41a6-b5a0-4c82f79cad51.png"> </p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
