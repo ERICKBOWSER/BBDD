@@ -360,8 +360,19 @@ Es una consulta que se presenta como un tabla virtual a partir de un conjunto de
 
 Tiene la misma estructura que una tabla, almacena la definición y no los datos.
 
+Las vistas sirven para crear subesquemas 
 
-IMPORTANTE: mysql no diferencia entre tabla y vistas, lo habítual es ponerle el prefijo "vista" al nombre.
+
+### IMPORTANTE 
+
+mysql no diferencia entre tabla y vistas, lo habítual es ponerle el prefijo "vista" al nombre.
+
+***
+
+No se pueden hacer inserciones.
+
+***
+
 
 ```
 CREATE VIEW vistaNombre AS
