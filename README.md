@@ -312,7 +312,7 @@ Se puede colocar un AND dentro de un JOIN
 
 <p align="center"> <img src="https://user-images.githubusercontent.com/92431188/231687351-35b7be43-bfab-4461-9e83-e835a71e87de.png"> </p>
 
-``MONTHNAME(fecha)´´
+``MONTHNAME(fecha)``
 * Devuelve el nombre del mes
 
 ``DAYNAME(fecha)``
@@ -320,8 +320,27 @@ Se puede colocar un AND dentro de un JOIN
 
 <p align="center"> <img src="https://user-images.githubusercontent.com/92431188/231688629-355b360b-f912-41f0-b71e-f3ecb741f2db.png"> </p>
 
+``SUBSTRING(atributoBuscar, posición)``
+* Devuelve el resto del contenido después de la posición que se especifique.
+
+<p align="center"> <img src="https://user-images.githubusercontent.com/92431188/233870192-0cd46c23-387f-4d53-82fb-a718e77019f6.png"> </p>
+
+``ROUND(atributo, número)``
+* Redondea un número a un número especifico de decimales.
+
+<p align="center"> <img src="https://user-images.githubusercontent.com/92431188/233872396-e85c3849-9d08-42b4-bcc2-16485dd0d4a8.png"> </p>
 
 
+``TIMESTAMPDIFF(unidad, fecha1, fecha2)``
+* unidad: devuelve un entero del tipo que se coloque que pueden ser MONTH, YEAR, MINUTE
+* fecha1: es la fecha que resta
+* fecha2: es la fecha a la que se le resta
+
+<p align="center"> <img src="https://user-images.githubusercontent.com/92431188/233876239-a74e2605-6177-4f3d-8156-a3f2c23b718d.png"> </p>
+
+``DATEDIFF(fecha1, fecha2)``
+* Devuelve el número de días de diferencia entre dos fechas.
+* IMPORTANTE: no se puede usar para calcular la edad
 
 
 
@@ -333,6 +352,44 @@ Se puede usar GROUP BY sin HAVING
 ***
 No se puede hacer un HAVING sin un GROUP BY
 ***
+
+
+## VISTAS
+
+Es una consulta que se presenta como un tabla virtual a partir de un conjunto de tablas.
+
+Tiene la misma estructura que una tabla, almacena la definición y no los datos.
+
+
+IMPORTANTE: mysql no diferencia entre tabla y vistas, lo habítual es ponerle el prefijo "vista" al nombre.
+
+```
+CREATE VIEW vistaNombre AS
+  consulta;
+ 
+ -- Consultar
+ SELECT * FROM vistaNombre;
+
+-- Eliminar
+DROP VIEW vistaNombre
+
+-- Modificar
+ALTER VIEW vistaNombre
+
+```
+
+### SUBCONSULTAS
+
+Es una consulta que se encuentra dentro de otra consulta. Que se ejecutan de la última a la primera.
+
+IMPORTANTE
+
+Dentro de una sentencia se puede especificar hasta 16 subconsultas y dentro de una subconsulta se pueden especificar otras subconsultas.
+
+***
+
+<p align="center"> <img src="https://user-images.githubusercontent.com/92431188/233891022-a2232330-1943-41a6-b5a0-4c82f79cad51.png"> </p>
+
 
 
 
