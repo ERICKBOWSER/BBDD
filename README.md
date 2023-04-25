@@ -352,6 +352,16 @@ Se puede usar GROUP BY sin HAVING
 ***
 No se puede hacer un HAVING sin un GROUP BY
 ***
+La consulta tiene que tener una función
+
+```
+SELECT FUNCION(aributo1), atributo2, etc
+FROM tabla
+GROUP BY atributo -- Indicar la columna que se va a agrupar
+HAVING FUNCION(atributo1) -- Se coloca la funcion de la consulta y un comparador
+```
+
+
 
 
 ## VISTAS
@@ -360,8 +370,19 @@ Es una consulta que se presenta como un tabla virtual a partir de un conjunto de
 
 Tiene la misma estructura que una tabla, almacena la definición y no los datos.
 
+Las vistas sirven para crear subesquemas 
 
-IMPORTANTE: mysql no diferencia entre tabla y vistas, lo habítual es ponerle el prefijo "vista" al nombre.
+
+### IMPORTANTE 
+
+mysql no diferencia entre tabla y vistas, lo habítual es ponerle el prefijo "vista" al nombre.
+
+***
+
+No se pueden hacer inserciones.
+
+***
+
 
 ```
 CREATE VIEW vistaNombre AS
@@ -389,8 +410,6 @@ Dentro de una sentencia se puede especificar hasta 16 subconsultas y dentro de u
 ***
 
 <p align="center"> <img src="https://user-images.githubusercontent.com/92431188/233891022-a2232330-1943-41a6-b5a0-4c82f79cad51.png"> </p>
-
-
 
 
 
