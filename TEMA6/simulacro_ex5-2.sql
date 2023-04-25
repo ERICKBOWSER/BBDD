@@ -17,7 +17,16 @@ JOIN catalogospromos ON catalogospromos.refart = articulos.refart
 JOIN promociones ON promociones.codpromo = catalogospromos.codpromo
 WHERE YEAR(promociones.fecinipromo) = 2012;
 
+-- 4
+DROP PROCEDURE IF EXISTS sim_ex5_2;
+DELIMITER $$
+CREATE PROCEDURE sim_ex5_2
+	()
+BEGIN
 
+
+END $$
+DELIMITER ;
 
 
 
