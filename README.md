@@ -342,6 +342,9 @@ Se puede colocar un AND dentro de un JOIN
 * Devuelve el número de días de diferencia entre dos fechas.
 * IMPORTANTE: no se puede usar para calcular la edad
 
+``AVG(tabla)``
+* Devuelve la media de todos los datos
+* Una función de agregado NO se puede anidar como tampoco en WHERE. Ejemplo ``AVG(COUNT(tabla))``
 
 
 ## GROUP BY Y HAVING
