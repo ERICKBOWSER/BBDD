@@ -415,25 +415,216 @@ Dentro de una sentencia se puede especificar hasta 16 subconsultas y dentro de u
 <p align="center"> <img src="https://user-images.githubusercontent.com/92431188/233891022-a2232330-1943-41a6-b5a0-4c82f79cad51.png"> </p>
 
 
+## Variables locales
+
+Este tipo de variables no tienen valor fuera del bloque de código donde se definen.
+
+### IMPORTANTE
+
+Deben declararse dentro de un bloque de código (BEGIN y END)
+
+***
+Zona de declaración: Tienen que declararse al principio del cuerpo del procedimiento, después de BEGIN y antes de la primera sentencia del procedimiento o función
+
+***
+Solo de puede usar DECLARE dentro de una rutina(procedimiento o función).
+
+***
+Fuera de una rutina solo se puede usar variables de sesión.
+
+***
+
+### Declaración
+
+Código: ``DECLARE nomVar1[, nomVar2, etc] TIPO;``
+
+### Asignar valores a variables
+
+Código variable local: ``SET nomVar1 = Valor | Expresión``
+
+Código variabe de sesión: ``SET @nomVar1 = Valor | Expresión``
+
+### Mostrar resultado
+
+Variables locales = ``SELECT nomVar1``
+
+Variables de sesión = ``SELECT @nomVar1``
+
+## Tablas temporales
+
+Son tablas que no forman parte de la estructura, ya que desaparecen al terminar la sesión.
+
+Código: ``CREATE TEMPORARY TABLE();``
+
+El resto de la sentencia es idéntica a la de una tabla normal.
+
+## Constructores de control de flujo
+
+### CALL
+
+Se usa para invocar y ejecutar un procedimiento.
+
+Código: ``CALL nomProcedimiento()``
+
+### RETURN
+
+Termina la ejecución de una función devolviendo un valor.
+
+Código: ``RETURN expresion``
+
+## Sentencia IF... ELSE
+
+La instrucción IF se ejecuta si la condición se satisface, en caso contrario, se ejecuta la instrucción ELSE(si existe)
+
+```
+IF expresion_booleana THEN
+BEGIN 
+  Sentencia SQL | Sentencia de control
+END
+END IF;
+-- Con ELSE IF (opcional)
+ELSE IF expresion_booleana THEN
+BEGIN 
+  Sentencia SQL | Sentencia de control
+END
+END IF;
+-- Con ELSE (opcional)
+BEGIN 
+  Sentencia SQL | Sentencia de control
+END
+END IF;
+```
 
 
+### Sentencia CASE (Condiciones múltiples)
+
+Función CASE sencilla: compara una expresión con un conjunto de resultados para dicha expresión.
+
+Función CASE de búsqueda: evalúa un conjunto de expresiones booleanas.
+
+IMPORTANTE: ambos aceptan el argumento ELSE opcional.
+IMPORTANTE: dentro de SELECT en lugar de "END CASE" ponemos solo "END" y no separamos cada opción con ","
+
+### CASE sencilla
+
+Código: 
+```
+CASE expresion
+WHEN caso1 THEN rtdo1 -- cada resultado puede ser un bloque de programa.
+WHEN caso2 THEN rtdo2
+...
+[ELSE rtdoN]
+END CASE;
+```
+
+Ejemplo de uso:
+```
+SELECT numem, nomem, ape1em, ape2em
+CASE numhiem
+  WHEN 0 THEN "Cero"
+  WHEN 1 THEN "Un hijo"
+  WHEN 2 THEN "Dos hijos"
+  ...
+  ELSE "Más de cinco hijos"
+  END AS NUM_HIJOS,
+  salarem, comisem
+ FROM empleados;
+```
 
 
+### CASE de búsqueda
+
+Código:
+```
+CASE
+WHEN expres_bool1 THEN rtdo1
+WHEN expres_bool2 THEN rtdo2
+...
+[ELSE rtdoN]
+END CASE;
+```
+
+Ejemplo de uso:
+```
+SELECT numem, nomem, ape1em, ape2em
+CASE
+  WHEN numhiem = 0 THEN "Cero
+  WHEN humhiem <= 3 THEN "Entre 1 y 3 hijos"
+  ELSE "Más de tres hijos"
+ END AS num_hijos,
+  salarem, comisem
+ FROM empleados;
+```
+
+## Bucle condicionales
+
+La sentencia o conjunto de sentencias que aparezcan dentro se repetirá hasta que se cumpla una condición.
+
+### Sentencia REPEAT
+
+Código:
+```
+REPEAT
+BEGIN
+  Sentencia sql | Sentencia de control
+END
+UNTIL condición
+END REPEAT;
+```
+
+Ejemplo:
+```
+REPEAT 
+BEGIN
+  UPDATE productos
+  SET precio_unidad= precio_unidad * 2;
+END
+UNTIL (SELECT AVG(precio_unidad) FROM productos) >= 100
+END REPEAT
+```
 
 
+### Sentencia WHILE
 
+Código:
+```
+WHILE condicion DO
+BEGIN
+  Sentencia sql | Sentencia de control
+END
+END WHILE
+```
 
+Ejemplo:
 
+```
+WHILE (SELECT AVG(precio_unidad) FROM productos) < 100 DO
+BEGIN
+  UPDATE productos
+  SET precio_unidad = precio_unidad * 2
+END
+END WHILE
+```
 
+## Control de excepciones. Manejadores de error
 
+Se tiene que conseguir gestionar todos los errores.
 
+Código:
+```
+DECLARE  {CONTINUE | EXIT} HANDLER FOR
+  {SQLSTATE cod_estado | MySQL codigo_error | nombre_error_usuario}
+  Acciones_error
+```
 
+CONTINUE | EXIT -> Determina el tipo de manejador:
+* EXIT: después de producirse el error saldremos del bloque de código donde se ha producido.
+* CONTINUE: después del error, continúa la ejecución con la siguiente instrucción.
 
-
-
-
-
-
+SQLSTATE cod_estado | MySQL codigo_error | nombre_error_usuario -> Determina el tipo de error que activará el manejador:
+* Estado SQL
+* Error MySQL
+* Error definido por el usuario
 
 
 
