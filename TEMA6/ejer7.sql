@@ -19,55 +19,56 @@ Para cada extensión telefónica, hallar cuantos empleados la usan y el salario 
 de éstos. Solo nos interesan aquellos grupos en los que hay entre 1 y 3 empleados.
 */
 
-SELECT extelem, COUNT(numem), AVG(salarem)
+SELECT extelem, COUNT(*), salarem, AVG(salarem)
 FROM empleados
 GROUP BY extelem
-HAVING COUNT(numem) BETWEEN 1 AND 3;
-
+HAVING COUNT(*) BETWEEN 1 AND 3;
 
 -- 3
 /*
 Prepara un procedimiento que, dado un código de promoción obtenga un listado con el 
 nombre de las categorías que tienen al menos dos productos incluidos en dicha promoción.
 */
-
 DROP PROCEDURE IF EXISTS act7_3;
 DELIMITER $$
 CREATE PROCEDURE act7_3
-	(IN codigo INT)
+	(codigo INT)
 BEGIN
-	SELECT nomcat
+	SELECT nomcat, count(*)
     FROM categorias
     JOIN articulos ON articulos.codcat = categorias.codcat
     JOIN catalogospromos ON catalogospromos.refart = articulos.refart
-    JOIN promociones ON promociones.codpromo = catalogospromos.codpromo
-    WHERE promociones.codpromo = codigo
-    GROUP BY categorias.nomcat > 2;
+    WHERE catalogospromos.codpromo = codigo
+    GROUP BY nomcat
+    HAVING COUNT(*) > 2;
 END $$
 DELIMITER ;
+CALL act7_3(1);
 
-CALL act7_3(2);
 SELECT * FROM categorias;
 SELECT * FROM promociones;
 SELECT * FROM articulos;
 
--- 4
+/* 4 Prepara un procedimiento que, dado un precio, obtenga un listado con el 
+nombre de las categorías en las que el precio  medio de sus productos supera 
+a dicho precio.*/
+
 DROP PROCEDURE IF EXISTS act7_4;
 DELIMITER $$
 CREATE PROCEDURE act7_4
-	(IN precio DECIMAL(5,2))
+	(precio DECIMAL(5,2))
 BEGIN
-	SELECT nomcat, AVG(preciobase)
+	SELECT nomcat, precioventa, AVG(precioventa)
     FROM categorias
     JOIN articulos ON articulos.codcat = categorias.codcat
-    GROUP BY nomcat
-    HAVING AVG(preciobase) > precio;   
+    group by nomcat
+    HAVING AVG(precioventa) > precio;
 END $$
 DELIMITER ;
+CALL act7_4(1);
 
-CALL act7_4(8);
-
--- 5
+/* 5 Prepara un procedimiento que muestre el importe total de las ventas por meses 
+de un año dado.*/
 DROP PROCEDURE IF EXISTS act7_5;
 DELIMITER $$
 CREATE PROCEDURE act7_5
@@ -76,20 +77,13 @@ BEGIN
 	SELECT SUM(precioventa), MONTH(fecventa)
     FROM ventas
     JOIN detalleventa ON detalleventa.codventa = ventas.codventa
-    WHERE YEAR(fecventa) = anio;
+    WHERE YEAR(fecventa) = anio    
+    GROUP BY MONTH(fecventa);
 END $$
 DELIMITER ;
 
 CALL act7_5(2012);
 SELECT * FROM ventas;
-
-
-
-
-
-
-
-
 
 
 
