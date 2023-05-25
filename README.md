@@ -322,8 +322,11 @@ Se puede colocar un AND dentro de un JOIN
 
 ``SUBSTRING(atributoBuscar, posición)``
 * Devuelve el resto del contenido después de la posición que se especifique.
+* Recorre de izquierda a derecha, por lo que se puede usar por ejemplo para coger un dato de la mitad de un texto haciendo uso de LENGTH()
 
 <p align="center"> <img src="https://user-images.githubusercontent.com/92431188/233870192-0cd46c23-387f-4d53-82fb-a718e77019f6.png"> </p>
+
+<p align="center"> <img src="https://github.com/ERICKBOWSER/BBDD/assets/92431188/060152bb-fa12-43a1-bb71-2ef0a3550e44"> </p>
 
 ``ROUND(atributo, número)``
 * Redondea un número a un número especifico de decimales.
@@ -346,6 +349,15 @@ Se puede colocar un AND dentro de un JOIN
 * Devuelve la media de todos los datos
 * Una función de agregado NO se puede anidar como tampoco en WHERE. Ejemplo ``AVG(COUNT(tabla))``
 
+``TRIM(tabla)``
+* Deja los espacios entre texto
+* Solo quita los lados
+
+<p align="center"> <img src="https://github.com/ERICKBOWSER/BBDD/assets/92431188/97381eff-2c90-4435-8baa-067e997d1c84"> </p>
+
+``CONVERT(dato, TIPO)``
+* Convierte un dato en el tipo que se indique
+
 
 ## GROUP BY Y HAVING
 
@@ -356,6 +368,8 @@ Se puede usar GROUP BY sin HAVING
 No se puede hacer un HAVING sin un GROUP BY
 ***
 La consulta tiene que tener una función
+***
+HAVING se usa para restringir los grupos de filas devueltas
 
 ```
 SELECT FUNCION(aributo1), atributo2, etc
@@ -363,6 +377,8 @@ FROM tabla
 GROUP BY atributo -- Indicar la columna que se va a agrupar
 HAVING FUNCION(atributo1) -- Se coloca la funcion de la consulta y un comparador
 ```
+
+<p align="center"> <img src="https://github.com/ERICKBOWSER/BBDD/assets/92431188/8896c34c-e131-4919-8e74-1f601d663e61"> </p>
 
 
 
