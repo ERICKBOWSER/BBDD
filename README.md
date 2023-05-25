@@ -322,8 +322,11 @@ Se puede colocar un AND dentro de un JOIN
 
 ``SUBSTRING(atributoBuscar, posición)``
 * Devuelve el resto del contenido después de la posición que se especifique.
+* Recorre de izquierda a derecha, por lo que se puede usar por ejemplo para coger un dato de la mitad de un texto haciendo uso de LENGTH()
 
 <p align="center"> <img src="https://user-images.githubusercontent.com/92431188/233870192-0cd46c23-387f-4d53-82fb-a718e77019f6.png"> </p>
+
+<p align="center"> <img src="https://github.com/ERICKBOWSER/BBDD/assets/92431188/060152bb-fa12-43a1-bb71-2ef0a3550e44"> </p>
 
 ``ROUND(atributo, número)``
 * Redondea un número a un número especifico de decimales.
@@ -342,6 +345,18 @@ Se puede colocar un AND dentro de un JOIN
 * Devuelve el número de días de diferencia entre dos fechas.
 * IMPORTANTE: no se puede usar para calcular la edad
 
+``AVG(tabla)``
+* Devuelve la media de todos los datos
+* Una función de agregado NO se puede anidar como tampoco en WHERE. Ejemplo ``AVG(COUNT(tabla))``
+
+``TRIM(tabla)``
+* Deja los espacios entre texto
+* Solo quita los lados
+
+<p align="center"> <img src="https://github.com/ERICKBOWSER/BBDD/assets/92431188/97381eff-2c90-4435-8baa-067e997d1c84"> </p>
+
+``CONVERT(dato, TIPO)``
+* Convierte un dato en el tipo que se indique
 
 
 ## GROUP BY Y HAVING
@@ -353,6 +368,8 @@ Se puede usar GROUP BY sin HAVING
 No se puede hacer un HAVING sin un GROUP BY
 ***
 La consulta tiene que tener una función
+***
+HAVING se usa para restringir los grupos de filas devueltas
 
 ```
 SELECT FUNCION(aributo1), atributo2, etc
@@ -360,6 +377,8 @@ FROM tabla
 GROUP BY atributo -- Indicar la columna que se va a agrupar
 HAVING FUNCION(atributo1) -- Se coloca la funcion de la consulta y un comparador
 ```
+
+<p align="center"> <img src="https://github.com/ERICKBOWSER/BBDD/assets/92431188/8896c34c-e131-4919-8e74-1f601d663e61"> </p>
 
 
 
@@ -412,25 +431,216 @@ Dentro de una sentencia se puede especificar hasta 16 subconsultas y dentro de u
 <p align="center"> <img src="https://user-images.githubusercontent.com/92431188/233891022-a2232330-1943-41a6-b5a0-4c82f79cad51.png"> </p>
 
 
+## Variables locales
+
+Este tipo de variables no tienen valor fuera del bloque de código donde se definen.
+
+### IMPORTANTE
+
+Deben declararse dentro de un bloque de código (BEGIN y END)
+
+***
+Zona de declaración: Tienen que declararse al principio del cuerpo del procedimiento, después de BEGIN y antes de la primera sentencia del procedimiento o función
+
+***
+Solo de puede usar DECLARE dentro de una rutina(procedimiento o función).
+
+***
+Fuera de una rutina solo se puede usar variables de sesión.
+
+***
+
+### Declaración
+
+Código: ``DECLARE nomVar1[, nomVar2, etc] TIPO;``
+
+### Asignar valores a variables
+
+Código variable local: ``SET nomVar1 = Valor | Expresión``
+
+Código variabe de sesión: ``SET @nomVar1 = Valor | Expresión``
+
+### Mostrar resultado
+
+Variables locales = ``SELECT nomVar1``
+
+Variables de sesión = ``SELECT @nomVar1``
+
+## Tablas temporales
+
+Son tablas que no forman parte de la estructura, ya que desaparecen al terminar la sesión.
+
+Código: ``CREATE TEMPORARY TABLE();``
+
+El resto de la sentencia es idéntica a la de una tabla normal.
+
+## Constructores de control de flujo
+
+### CALL
+
+Se usa para invocar y ejecutar un procedimiento.
+
+Código: ``CALL nomProcedimiento()``
+
+### RETURN
+
+Termina la ejecución de una función devolviendo un valor.
+
+Código: ``RETURN expresion``
+
+## Sentencia IF... ELSE
+
+La instrucción IF se ejecuta si la condición se satisface, en caso contrario, se ejecuta la instrucción ELSE(si existe)
+
+```
+IF expresion_booleana THEN
+BEGIN 
+  Sentencia SQL | Sentencia de control
+END
+END IF;
+-- Con ELSE IF (opcional)
+ELSE IF expresion_booleana THEN
+BEGIN 
+  Sentencia SQL | Sentencia de control
+END
+END IF;
+-- Con ELSE (opcional)
+BEGIN 
+  Sentencia SQL | Sentencia de control
+END
+END IF;
+```
 
 
+### Sentencia CASE (Condiciones múltiples)
+
+Función CASE sencilla: compara una expresión con un conjunto de resultados para dicha expresión.
+
+Función CASE de búsqueda: evalúa un conjunto de expresiones booleanas.
+
+IMPORTANTE: ambos aceptan el argumento ELSE opcional.
+IMPORTANTE: dentro de SELECT en lugar de "END CASE" ponemos solo "END" y no separamos cada opción con ","
+
+### CASE sencilla
+
+Código: 
+```
+CASE expresion
+WHEN caso1 THEN rtdo1 -- cada resultado puede ser un bloque de programa.
+WHEN caso2 THEN rtdo2
+...
+[ELSE rtdoN]
+END CASE;
+```
+
+Ejemplo de uso:
+```
+SELECT numem, nomem, ape1em, ape2em
+CASE numhiem
+  WHEN 0 THEN "Cero"
+  WHEN 1 THEN "Un hijo"
+  WHEN 2 THEN "Dos hijos"
+  ...
+  ELSE "Más de cinco hijos"
+  END AS NUM_HIJOS,
+  salarem, comisem
+ FROM empleados;
+```
 
 
+### CASE de búsqueda
+
+Código:
+```
+CASE
+WHEN expres_bool1 THEN rtdo1
+WHEN expres_bool2 THEN rtdo2
+...
+[ELSE rtdoN]
+END CASE;
+```
+
+Ejemplo de uso:
+```
+SELECT numem, nomem, ape1em, ape2em
+CASE
+  WHEN numhiem = 0 THEN "Cero
+  WHEN humhiem <= 3 THEN "Entre 1 y 3 hijos"
+  ELSE "Más de tres hijos"
+ END AS num_hijos,
+  salarem, comisem
+ FROM empleados;
+```
+
+## Bucle condicionales
+
+La sentencia o conjunto de sentencias que aparezcan dentro se repetirá hasta que se cumpla una condición.
+
+### Sentencia REPEAT
+
+Código:
+```
+REPEAT
+BEGIN
+  Sentencia sql | Sentencia de control
+END
+UNTIL condición
+END REPEAT;
+```
+
+Ejemplo:
+```
+REPEAT 
+BEGIN
+  UPDATE productos
+  SET precio_unidad= precio_unidad * 2;
+END
+UNTIL (SELECT AVG(precio_unidad) FROM productos) >= 100
+END REPEAT
+```
 
 
+### Sentencia WHILE
 
+Código:
+```
+WHILE condicion DO
+BEGIN
+  Sentencia sql | Sentencia de control
+END
+END WHILE
+```
 
+Ejemplo:
 
+```
+WHILE (SELECT AVG(precio_unidad) FROM productos) < 100 DO
+BEGIN
+  UPDATE productos
+  SET precio_unidad = precio_unidad * 2
+END
+END WHILE
+```
 
+## Control de excepciones. Manejadores de error
 
+Se tiene que conseguir gestionar todos los errores.
 
+Código:
+```
+DECLARE  {CONTINUE | EXIT} HANDLER FOR
+  {SQLSTATE cod_estado | MySQL codigo_error | nombre_error_usuario}
+  Acciones_error
+```
 
+CONTINUE | EXIT -> Determina el tipo de manejador:
+* EXIT: después de producirse el error saldremos del bloque de código donde se ha producido.
+* CONTINUE: después del error, continúa la ejecución con la siguiente instrucción.
 
-
-
-
-
-
+SQLSTATE cod_estado | MySQL codigo_error | nombre_error_usuario -> Determina el tipo de error que activará el manejador:
+* Estado SQL
+* Error MySQL
+* Error definido por el usuario
 
 
 
