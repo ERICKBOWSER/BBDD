@@ -16,7 +16,7 @@ FOR EACH ROW
 	BEGIN
 		-- Comprobamos si el proyecto ya ha finalizado
 		IF NEW.fecfinproy IS NOT NULL AND OLD.fecfinproy IS NULL THEN
-			NEW.fecfinproy = CURDATE();
+			SET NEW.fecfinproy = CURDATE();
 		
             IF DATE_ADD(NEW.feciniproy, INTERVAL NEW.duracionprevista day) -- Comprobamos si el trabajo se a terminado en el tiempo previsto
 				>= NEW.fecfinproy THEN
