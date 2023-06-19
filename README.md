@@ -643,21 +643,64 @@ SQLSTATE cod_estado | MySQL codigo_error | nombre_error_usuario -> Determina el 
 * Error definido por el usuario
 
 
+## Disparadores (Triggers)
+
+###  IMPORTANTE
+
+Un disparados no podrá estar asociado a una vista ni a una tabla temporal.
+
+***
+
+OLD y NEW solo son accesibles desde los disparadores o triggers, nunca desde cualquier otro bloque de código que no esté dentro de un trigger.
+
+***
+
+Internamente, una modificación (UPDATE) implica un borrado (DELETE) y una inserción
+(INSERT).
+
+***
 
 
+Un disparador esta está asociado a un tabla y a una instrucción de modificación de datos dentro de esa tabla. Se lanza justamente antes o después de la instrucción para la que se ha creado.
+ 
+Un disparador se prepara para modificar datos que pueden ser UPDATE, INSERT o DELETE. Hay que indicar si queremos que se lance antes (BEFORE) o después (AFTER) que la instrucción a la que se asocia.
 
+Crear trigger: 
+```
+CREATE TRIGGER nombre_trigger {BEFORE | AFTER} {INSERT | DELETE | UPDATE}
+ON nombre tabla
+FOR EACH ROM -- bucle
+  cuerpo_trigger;
+```
 
+nombre_trigger.- Es el nombre con el que se almacena el disparador.
+nombre_tabla.- Tabla con la que está asociada el disparador.
+BEFORE | AFTER.- Especifica el momento en el que se activará.
+{INSERT | DELETE | UPDATE}.- Indica la instrucción que activará el trigger. Se puede utilizar el
+mismo desencadenador para más de una de estas instrucciones.
+cuerpo_del_trigger.- Sentencia/s que se disparará/n. Si es más de una sentencia encerrarán en un
+bloque de sentencias (entre BEGIN y END).
 
+Mostrar trigger:
+```
+SHOW TRIGGERS [{FROM | IN} nombre_bd]
+  [LIKE 'patron' | WHERE predicado]
+```
 
+Eliminar trigger:
+```
+DROP TRIGGER [nombre_bd.]nombre_trigger
+```
 
+## Sentencia SIGNAL
 
+Permite provocar errores o warnings y definir el mensaje que se mostrará asociado.
 
+Código: `SIGNAL SQLSTATE '01000' SET MESSAGE_TEXT = 'mensaje'`
 
-
-
-
-
-
+Códigos:
+*  01000: provoca un warning el cual puede mostrar un mensaje asociado.
+*  55019 o 45000: provoca un error que aborta la operación y muestra un mensaje.
 
 
 
