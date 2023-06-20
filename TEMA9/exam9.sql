@@ -61,21 +61,26 @@ tabla: matriculas
 TIPO: BEFORE
 OPERACION: UPDATE
 */
-
+DROP TRIGGER exam9_p3;
 DELIMITER $$
 CREATE TRIGGER exam9_p3 BEFORE UPDATE
 ON matriculas
 FOR EACH ROW
 BEGIN
-	IF NEW.nota > 10 THEN
+	IF OLD.nota <> NEW.nota AND NEW.nota > 10 THEN
     BEGIN
-		SET OLD.nota = 10;
+		SET NEW.nota = 10; -- No se permiten actualizaciones de OLD en el UPDATE
         
         SIGNAL SQLSTATE '01000' SET MESSAGE_TEXT = 'Se le asignara un 10';
 	END;
     END IF;
 END $$
 DELIMITER ;
+
+UPDATE matriculas
+	SET nota = 15
+    WHERE codmateria = 1;
+SELECT * FROM matriculas;
 
 -- P5
 /*
